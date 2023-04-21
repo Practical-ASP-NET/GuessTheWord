@@ -147,7 +147,7 @@ ol.alphabet li.attempted {
     flex-wrap: wrap;
 }
 
-.character {
+span.word span {
     width: 1.2em;
     border-bottom: 3px solid #4f4f4f;
     text-align: center;

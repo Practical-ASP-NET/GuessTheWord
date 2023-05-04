@@ -2,21 +2,31 @@
 
 <PageTitle>Guess The Word</PageTitle>
 
-<TargetWord Target="Star Wars" FoundLetters="_foundLetters"/>
+<TargetWord Target="@_targetWord" FoundLetters="_foundLetters"/>
 
 <Alphabet LetterSelected="OnLetterSelected"/>
+
+<span>@_incorrectAnswers incorrect attempts</span>
 
 @code {
 
     readonly string _targetWord = Films.Random();
 
     readonly HashSet<char> _foundLetters = new();
+
+    int _incorrectAnswers = 0;
     
     private void OnLetterSelected(char letter)
     {
-        if (_targetWord.Contains(letter))
+        Console.WriteLine(letter);
+        
+        if (GameHelpers.CheckLetter(letter, _targetWord))
         {
             _foundLetters.Add(letter);
+        }
+        else
+        {
+            _incorrectAnswers++;
         }
     }
 }

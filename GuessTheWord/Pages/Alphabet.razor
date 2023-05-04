@@ -1,0 +1,18 @@
+﻿<ol class="alphabet">
+    @foreach (var letter in Enumerable.Range('A', 'Z' - 'A' + 1).Select(i => (char)i))
+    {
+        <li @onclick="@(()=>SelectLetter(letter))">@letter</li>
+    }
+</ol>
+
+@code {
+
+    [Parameter]
+    public EventCallback<char> LetterSelected { get; set; }
+
+    void SelectLetter(char letter)
+    {
+        LetterSelected.InvokeAsync(letter);
+    }
+
+}

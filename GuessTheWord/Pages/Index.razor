@@ -2,3 +2,11 @@
 
 <PageTitle>Guess The Word</PageTitle>
 
+<Alphabet LetterSelected="OnLetterSelected"/>
+
+@code {
+    private void OnLetterSelected(char letter)
+    {
+        Console.WriteLine("Letter Selected: " + letter);
+    }
+}

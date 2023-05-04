@@ -2,13 +2,21 @@
 
 <PageTitle>Guess The Word</PageTitle>
 
-<TargetWord Target="Star Wars" FoundLetters="new HashSet<char>()"/>
+<TargetWord Target="Star Wars" FoundLetters="_foundLetters"/>
 
 <Alphabet LetterSelected="OnLetterSelected"/>
 
 @code {
+
+    readonly string _targetWord = Films.Random();
+
+    readonly HashSet<char> _foundLetters = new();
+    
     private void OnLetterSelected(char letter)
     {
-        Console.WriteLine("Letter Selected: " + letter);
+        if (_targetWord.Contains(letter))
+        {
+            _foundLetters.Add(letter);
+        }
     }
 }

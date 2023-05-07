@@ -1,7 +1,7 @@
 ﻿<ol class="alphabet">
     @foreach (var letter in Enumerable.Range('A', 'Z' - 'A' + 1).Select(i => (char)i))
     {
-        <li>
+        <li class="@ListItemClass(letter)">
             <button disabled="@Disabled" @onclick="@(() => SelectLetter(letter))">
                 @letter
             </button>
@@ -14,11 +14,19 @@
     [Parameter]
     public EventCallback<char> LetterSelected { get; set; }
 
+    HashSet<char> _attemptedLetters = new HashSet<char>();
+
+    string ListItemClass(char letter) => _attemptedLetters.Contains(letter) ? "attempted" : "";
+
     [Parameter]
     public bool Disabled { get; set; }
     
     void SelectLetter(char letter)
     {
+        if (_attemptedLetters.Contains(letter))
+            return;
+        
+        _attemptedLetters.Add(letter);
         LetterSelected.InvokeAsync(letter);
     }
 

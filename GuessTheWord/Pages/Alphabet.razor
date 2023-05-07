@@ -1,7 +1,11 @@
 ﻿<ol class="alphabet">
     @foreach (var letter in Enumerable.Range('A', 'Z' - 'A' + 1).Select(i => (char)i))
     {
-        <li @onclick="@(()=>SelectLetter(letter))">@letter</li>
+        <li>
+            <button @onclick="@(() => SelectLetter(letter))">
+                @letter
+            </button>
+        </li>
     }
 </ol>
 

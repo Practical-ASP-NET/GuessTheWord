@@ -114,7 +114,7 @@ ol.alphabet {
     flex-wrap: wrap;
 }
 
-ol.alphabet li {
+ol.alphabet li button {
     padding: 0.5em 1em 0.5em 1em;
     border: 1px solid #d7d7d7;
     font-size: 1.3em;
@@ -123,11 +123,11 @@ ol.alphabet li {
     cursor: pointer;
 }
 
-ol.alphabet li:hover {
+.alphabet button:hover {
     background-color: #ff5e00;
 }
 
-ol.alphabet li.attempted {
+.alphabet .attempted button {
     background-color: #808080;
 }
 

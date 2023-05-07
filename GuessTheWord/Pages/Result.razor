@@ -1,0 +1,18 @@
+﻿<div class="banner @Status">
+	@if (Status == "won")
+	{
+		<p><strong>You did it!</strong></p>
+	} else if (Status == "lost")
+	{
+		<p><strong>Unlucky!</strong> The correct answer was @Answer.</p>
+	}
+</div>
+@code {
+
+    [Parameter]
+    public string Status { get; set; }
+
+    [Parameter]
+    public string Answer { get; set; }
+
+}

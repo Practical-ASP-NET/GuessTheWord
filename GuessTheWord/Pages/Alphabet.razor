@@ -10,8 +10,14 @@
     [Parameter]
     public EventCallback<char> LetterSelected { get; set; }
 
+    [Parameter]
+    public bool Disabled { get; set; }
+    
     void SelectLetter(char letter)
     {
+        @if (Disabled)
+            return;
+        
         LetterSelected.InvokeAsync(letter);
     }
 

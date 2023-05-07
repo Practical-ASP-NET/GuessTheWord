@@ -4,9 +4,15 @@
 
 <TargetWord Target="@_targetWord" FoundLetters="_foundLetters"/>
 
-<Alphabet LetterSelected="OnLetterSelected"/>
+<Alphabet LetterSelected="OnLetterSelected" 
+          Disabled="@(_status != "running")"/>
 
 <span>@_incorrectAnswers incorrect attempts</span>
+
+@if (_status != "running")
+{
+    <Result Status="@_status" Answer="@_targetWord"/>
+}
 
 @code {
 
@@ -15,11 +21,10 @@
     readonly HashSet<char> _foundLetters = new();
 
     int _incorrectAnswers = 0;
-    
+    private string _status = "running";
+
     private void OnLetterSelected(char letter)
     {
-        Console.WriteLine(letter);
-        
         if (GameHelpers.CheckLetter(letter, _targetWord))
         {
             _foundLetters.Add(letter);
@@ -28,5 +33,25 @@
         {
             _incorrectAnswers++;
         }
+
+        _status = CheckStatus();
     }
+
+    private string CheckStatus()
+    {
+        var guessedCorrectly = GameHelpers.AllLettersFound(_targetWord, _foundLetters);
+        
+        if (guessedCorrectly)
+        {
+            return "won";
+        }
+        
+        if (_incorrectAnswers > 6)
+        {
+            return "lost";
+        }
+
+        return "running";
+    }
+
 }

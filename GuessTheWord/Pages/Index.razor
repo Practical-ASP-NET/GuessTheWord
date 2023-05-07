@@ -2,12 +2,12 @@
 
 <PageTitle>Guess The Word</PageTitle>
 
+<Flower GuessesLeft="@RemainingAttempts" />
+
 <TargetWord Target="@_targetWord" FoundLetters="_foundLetters"/>
 
 <Alphabet LetterSelected="OnLetterSelected" 
           Disabled="@(_status != "running")"/>
-
-<span>@_incorrectAnswers incorrect attempts</span>
 
 @if (_status != "running")
 {
@@ -22,6 +22,7 @@
 
     int _incorrectAnswers = 0;
     private string _status = "running";
+    int RemainingAttempts => 6 - _incorrectAnswers;
 
     private void OnLetterSelected(char letter)
     {
@@ -46,7 +47,7 @@
             return "won";
         }
         
-        if (_incorrectAnswers > 6)
+        if (RemainingAttempts == 0)
         {
             return "lost";
         }

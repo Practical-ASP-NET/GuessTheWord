@@ -13,4 +13,10 @@ public static class GameHelpers
             .Except(" ")
             .Distinct();
     }
+    
+    public static bool AllLettersFound(string targetWord, IEnumerable<char> foundLetters)
+    {
+        return TargetLetters(targetWord)
+            .All(foundLetters.Contains);
+    }
 }
